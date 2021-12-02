@@ -1,0 +1,22 @@
+{
+  "name": "node_python_csv_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vulwsztyn/node_python_csv_server.git"
+  },
+  "author": "Artur Mostowski",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Vulwsztyn/node_python_csv_server/issues"
+  },
+  "homepage": "https://github.com/Vulwsztyn/node_python_csv_server#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
