@@ -20,7 +20,7 @@ export let options = {
 
 const failureRate = new Rate('check_failure_rate')
 const sampleFiles = [...Array(6).keys()].map((i) => open(`./files/sample${i + 1}.csv`, 'b'))
-const outputFiles = [...Array(6).keys()].map((i) => open(`./files/sample${i + 1}.csv`))
+const outputFiles = [...Array(6).keys()].map((i) => open(`./files/output${i + 1}.csv`))
 export default function () {
   const fileIndex = Math.floor(Math.random() * 6)
   const data = {
