@@ -9,6 +9,9 @@ const fs = require('fs')
 
 const app = express()
 
+const swaggerUi = require('swagger-ui-express')
+swaggerDocument = require('./swagger.json')
+
 app.use(
   fileUpload({
     createParentPath: true,
@@ -79,6 +82,7 @@ app.post('/api', async (req, res) => {
   }
 })
 
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
 app.get('*', (req, res) => {
   res.send('Hello World!\n')
 })
