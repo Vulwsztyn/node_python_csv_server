@@ -15,7 +15,7 @@ app.use(
 app.use(cors())
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(morgan('dev'))
+process.env.NODE_ENV === 'dev' && app.use(morgan('dev'))
 
 const port = process.env.PORT || 3000
 

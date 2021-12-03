@@ -8,8 +8,10 @@ services:
     environment:
       - CHOKIDAR_USEPOLLING=true
       - PORT=3000
+      - NODE_ENV=dev
     volumes:
       - .:/app
+      - /app/node_modules
     container_name: node_python_csv_server
     working_dir: /app
     ports:
