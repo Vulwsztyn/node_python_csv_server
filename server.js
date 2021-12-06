@@ -1,9 +1,3 @@
-const fileUpload = require('express-fileupload')
-const cors = require('cors')
-const bodyParser = require('body-parser')
-const swaggerUi = require('swagger-ui-express')
-const morgan = require('morgan')
-swaggerDocument = require('./swagger.json')
 class Server {
   constructor(app, fileServie, logicService) {
     this.app = app
@@ -13,17 +7,6 @@ class Server {
   }
 
   init() {
-    process.env.NODE_ENV === 'dev' && this.app.use(morgan('dev'))
-    this.app.use(
-      fileUpload({
-        createParentPath: true,
-      }),
-    )
-
-    this.app.use(cors())
-    this.app.use(bodyParser.json())
-    this.app.use(bodyParser.urlencoded({ extended: true }))
-
     this.app.post('/api', async (req, res) => {
       try {
         if (!req.files || !req.files.file) {
@@ -42,7 +25,6 @@ class Server {
       }
     })
 
-    this.app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
     this.app.get('*', (req, res) => {
       res.send('Hello World!\n')
     })
