@@ -1,53 +1,14 @@
 const fileUpload = require('express-fileupload')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const { v4 } = require('uuid')
 const swaggerUi = require('swagger-ui-express')
-const fs = require('fs')
-const { exec } = require('child_process')
 const morgan = require('morgan')
 swaggerDocument = require('./swagger.json')
-
-async function execPromise(cmd) {
-  return new Promise(function (resolve, reject) {
-    exec(cmd, (err, stdout, stderr) => {
-      if (err) {
-        reject(err)
-      } else {
-        resolve({ stdout, stderr })
-      }
-    })
-  })
-}
-
-async function createFilePromise(file, filename) {
-  return new Promise(function (resolve, reject) {
-    fs.writeFile(`./uploads/${filename}.csv`, file, (err) => {
-      if (!!err) {
-        reject(err)
-      } else {
-        resolve()
-      }
-    })
-  })
-}
-
-async function getPythonScriptResponse(file, filename) {
-  const path = './uploads'
-  await fs.mkdir(path, (err) => {
-    if (!!err && err.code !== 'EEXIST') {
-      console.error(err)
-      throw err
-    }
-  })
-  await createFilePromise(file, filename)
-  const { stdout } = await execPromise(`python3 main.py ./uploads/${filename}.csv`)
-  return stdout.toString()
-}
-
 class Server {
-  constructor(app) {
+  constructor(app, fileServie, logicService) {
     this.app = app
+    this.fileServie = fileServie
+    this.logicService = logicService
     this.init()
   }
 
@@ -72,10 +33,8 @@ class Server {
           })
         } else {
           const file = req.files.file.data.toString('utf-8')
-          const filename = v4()
-          const result = await getPythonScriptResponse(file, filename)
+          const result = await this.logicService.processFile(file)
           res.send(result)
-          await execPromise(`rm ./uploads/${filename}.csv`)
         }
       } catch (err) {
         console.error(err)
