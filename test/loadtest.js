@@ -3,10 +3,10 @@ import { check } from 'k6'
 import { Rate } from 'k6/metrics'
 
 export let options = {
-    stages: [
-      { target: 200, duration: "5s" },
-      { target: 200, duration: "5s" },
-      { target: 0, duration: "5s" }
+  stages: [
+    { target: 200, duration: '5s' },
+    { target: 200, duration: '5s' },
+    { target: 0, duration: '5s' },
   ],
   thresholds: {
     check_failure_rate: [

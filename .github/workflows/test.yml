@@ -27,4 +27,4 @@ jobs:
       - name: Start server and run tests
         run: |
           npm start & npx wait-on http://localhost:3000
-          ./k6 run loadtest.js
+          ./k6 run ./test/loadtest.js
