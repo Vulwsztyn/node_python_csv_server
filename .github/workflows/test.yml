@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-    name: Run k6 test
+    name: Run tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,7 +24,11 @@ jobs:
       - name: Install python libraries
         run: |
           pip3 install --no-cache -r requirements.txt
+      - name: run jest tests
+        run: |
+          npm run test
       - name: Start server and run tests
         run: |
           npm start & npx wait-on http://localhost:3000
-          ./k6 run loadtest.js
+          ./k6 run ./test/loadtest.js
+      

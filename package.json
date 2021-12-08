@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node_modules/jest/bin/jest.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/Vulwsztyn/node_python_csv_server#readme",
   "devDependencies": {
+    "jest": "^27.4.3",
+    "jest-extended": "^1.2.0",
     "nodemon": "^2.0.15"
   },
   "dependencies": {
